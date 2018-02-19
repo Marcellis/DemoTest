@@ -1,4 +1,4 @@
-package com.example.marmm.demolevel3;
+package com.example.marmm.demotest;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

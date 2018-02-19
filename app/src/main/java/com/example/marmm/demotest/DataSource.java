@@ -1,4 +1,4 @@
-package com.example.marmm.demolevel3;
+package com.example.marmm.demotest;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -44,6 +44,25 @@ public class DataSource {
     public Cursor getAllReminders() {
         return mDatabase.query(RemindersContract.ReminderEntry.TABLE_NAME,
                 REMINDERS_ALL_COLUMNS, null, null, null, null, null);
+    }
+
+
+    public void deleteReminder(long id) {
+        mDatabase.delete(RemindersContract.ReminderEntry.TABLE_NAME, RemindersContract.ReminderEntry._ID + " =?",
+                new String[]{Long.toString(id)});
+
+    }
+
+    public void updateReminder(long id, String name) {
+        ContentValues args = new ContentValues();
+        args.put(RemindersContract.ReminderEntry.COLUMN_NAME_REMINDER, name);
+
+        mDatabase.update(RemindersContract.ReminderEntry.TABLE_NAME, args, RemindersContract.ReminderEntry._ID  + "=?",
+                new String[]{Long.toString(id)});
+    }
+
+    public Cursor getOneReminder(long id) {
+        return mDatabase.query(RemindersContract.ReminderEntry.TABLE_NAME, REMINDERS_ALL_COLUMNS, RemindersContract.ReminderEntry._ID + " =?", new String[]{Long.toString(id)}, null, null, null);
     }
 
 

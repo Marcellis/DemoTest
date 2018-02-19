@@ -1,4 +1,4 @@
-package com.example.marmm.demolevel3;
+package com.example.marmm.demotest;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -17,9 +17,6 @@ import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.facebook.stetho.Stetho;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements ReminderAdapter.ReminderClickListener {
 
@@ -205,12 +202,17 @@ public class MainActivity extends AppCompatActivity implements ReminderAdapter.R
 
 
     @Override
-    public void reminderOnLongClick(long i) {
+    public void reminderOnLongClick(long id) {
+        mDataSource.deleteReminder(id);
+        updateUI();
 
     }
 
     @Override
-    public void reminderOnClick(long i) {
-
+    public void reminderOnClick(long id) {
+        Intent intent = new Intent(MainActivity.this, UpdateActivity.class);
+        intent.putExtra(REMINDER_POSITION, id);
+        startActivity (intent);
     }
+
 }

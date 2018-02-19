@@ -1,4 +1,4 @@
-package com.example.marmm.demolevel3;
+package com.example.marmm.demotest;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -7,8 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import java.util.List;
 
 /**
  * Created by marmm on 11/1/17.
@@ -21,8 +19,8 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
     private Cursor mCursor;
 
     public interface ReminderClickListener{
-        void reminderOnLongClick (long i);
-        void reminderOnClick (long i);
+        void reminderOnLongClick (long id);
+        void reminderOnClick (long id);
     }
 
 
