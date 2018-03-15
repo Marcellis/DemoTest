@@ -1,7 +1,10 @@
 package com.example.marmm.demotest;
 
 import android.app.Activity;
+import android.content.ContentUris;
+import android.content.ContentValues;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,7 +18,6 @@ public class UpdateActivity extends AppCompatActivity {
 
     private EditText mReminderView;
     private long mID;
-    private DataSource mDataSource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,14 +31,12 @@ public class UpdateActivity extends AppCompatActivity {
         //Obtain parameters provided by MainActivity
         mID = getIntent().getLongExtra(MainActivity.REMINDER_POSITION, -1);
 
-        //Initiate and open DataSource
-        mDataSource = new DataSource(this);
-        mDataSource.open();
-
-        //Get current reminder name
-        Cursor mCursor = mDataSource.getOneReminder(mID);
+        Uri singleUri = ContentUris.withAppendedId(RemindersContract.CONTENT_URI,mID);
+        Cursor mCursor =   getContentResolver().query (singleUri,null,null, null, null);
         if (mCursor != null)
             mCursor.moveToFirst();
+
+
         mReminderView.setText(mCursor.getString(mCursor.getColumnIndex(RemindersContract.ReminderEntry.COLUMN_NAME_REMINDER)));
 
 
@@ -48,8 +48,11 @@ public class UpdateActivity extends AppCompatActivity {
                 if (!TextUtils.isEmpty(updatedReminderText)) {
                     //Prepare the return parameter and return
 
-                    mDataSource.updateReminder(mID,updatedReminderText);
-                    mDataSource.close();
+                    ContentValues values = new ContentValues();
+                    values.put(RemindersContract.ReminderEntry.COLUMN_NAME_REMINDER,updatedReminderText);
+                    Uri singleUri = ContentUris.withAppendedId(RemindersContract.CONTENT_URI,mID);
+                    getContentResolver().update(singleUri, values, null, null);
+
 
                     setResult(Activity.RESULT_OK);
 
