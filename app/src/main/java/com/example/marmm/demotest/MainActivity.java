@@ -1,10 +1,8 @@
 package com.example.marmm.demotest;
 
-import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -172,7 +170,7 @@ public class MainActivity extends AppCompatActivity implements ReminderAdapter.R
             return true;
         }
         if (id == R.id.viewPager) {
-            Intent myIntent = new Intent(this, Main2Activity.class);
+            Intent myIntent = new Intent(this, TabActivity.class);
             startActivity(myIntent);
             return true;
         }
@@ -181,31 +179,10 @@ public class MainActivity extends AppCompatActivity implements ReminderAdapter.R
     }
 
 
-/*
-    @Override
-    public void reminderOnLongClick(int i) {
-        mReminders.remove(i);
-        updateUI();
-    }
-
-    @Override
-    public void reminderOnClick(int i) {
-        Intent intent = new Intent(MainActivity.this, UpdateActivity.class);
-        intent.putExtra(REMINDER_POSITION, i);
-        startActivity(intent);
-
-
-    }
-*/
-
-
-
     @Override
     public void reminderOnLongClick(long id) {
 
-        Uri singleUri = ContentUris.withAppendedId(RemindersContract.CONTENT_URI,id);
-        getContentResolver().delete(singleUri, null, null);
-
+        startActivity(new Intent(this, TabActivity.class));
 
 
     }

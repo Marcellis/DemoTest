@@ -22,7 +22,7 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
-public class Main2Activity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
+public class TabActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -145,7 +145,7 @@ public class Main2Activity extends AppCompatActivity implements LoaderManager.Lo
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main2, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+            textView.setText(getArguments().getString(ARG_SECTION_NUMBER));
             return rootView;
         }
     }

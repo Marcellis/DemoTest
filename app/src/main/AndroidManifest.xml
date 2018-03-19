@@ -31,7 +31,7 @@
             android:multiprocess="true"></provider>
 
         <activity
-            android:name=".Main2Activity"
+            android:name=".TabActivity"
             android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
